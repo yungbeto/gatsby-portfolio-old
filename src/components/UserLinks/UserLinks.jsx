@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./UserLinks.css";
+import "./UserLinks.scss";
 
 class UserLinks extends Component {
   getLinkElements() {
