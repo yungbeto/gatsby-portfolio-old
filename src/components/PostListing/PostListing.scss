@@ -1,0 +1,48 @@
+.blogCard {
+    width: 100%;
+    padding: 0 0 8px 0;
+    margin: 0 0 24px 0;
+    border-radius: 4px;
+}
+.blogCard__cover {
+    height: 128px;
+    border-radius: 4px 4px 0 0;
+}
+.blogCard__header {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 16px 8px 16px;
+}
+.blogCard__header--title {
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+.blogCard__header--subTitle {
+    font-size: 13px;
+    line-height: 24px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+.blogCard__main {
+    padding: 0 16px 8px 16px;
+    display: flex;
+    flex-direction: column;
+}
+.blogCard__main--copy {
+    font-size: 16px;
+    line-height: 24px;
+}
+.blogCard_readMore {
+    text-align: left;
+    padding: 8px 0 0 0;
+    background: none;
+    transition: .1s all ease-in-out;
+    color: #276D9B;
+    text-decoration: none;
+}
+.blogCard_readMore:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

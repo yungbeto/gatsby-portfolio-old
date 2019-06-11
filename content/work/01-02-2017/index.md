@@ -3,6 +3,7 @@ title: "The Fallen Time"
 cover: "https://unsplash.it/400/300/?random?TheFallenTime"
 date: "01/02/2017"
 category: "another one"
+posttype: "work"
 tags:
     - test
     - something

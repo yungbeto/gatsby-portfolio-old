@@ -43,36 +43,37 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  const postPage = path.resolve("src/templates/post.jsx");
-  const tagPage = path.resolve("src/templates/tag.jsx");
-  const categoryPage = path.resolve("src/templates/category.jsx");
-
-  const markdownQueryResult = await graphql(
-    `
-      {
-        allMarkdownRemark {
-          edges {
-            node {
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-                tags
-                category
-                date
+  return new Promise((resolve, reject) => {
+    const postPage = path.resolve("src/templates/post.jsx");
+    const projectPage = path. resolve("src/templates/project.jsx");
+    const tagPage = path.resolve("src/templates/tag.jsx");
+    const categoryPage = path.resolve("src/templates/category.jsx");
+    resolve(
+      graphql(
+        `
+          {
+            allMarkdownRemark {
+              edges {
+                node {
+                  frontmatter {
+                    tags
+                    category
+                    posttype
+                  }
+                  fields {
+                    slug
+                  }
+                }
               }
             }
           }
-        }
-      }
-    `
-  );
-
-  if (markdownQueryResult.errors) {
-    console.error(markdownQueryResult.errors);
-    throw markdownQueryResult.errors;
-  }
+          `
+          ).then(result => {
+            if (result.errors) {
+              /* eslint no-console: "off" */
+              console.log(result.errors);
+              reject(result.errors);
+            }
 
   const tagSet = new Set();
   const categorySet = new Set();
@@ -111,18 +112,25 @@ exports.createPages = async ({ graphql, actions }) => {
     const prevID = index - 1 >= 0 ? index - 1 : postsEdges.length - 1;
     const nextEdge = postsEdges[nextID];
     const prevEdge = postsEdges[prevID];
-
-    createPage({
-      path: edge.node.fields.slug,
-      component: postPage,
-      context: {
-        slug: edge.node.fields.slug,
-        nexttitle: nextEdge.node.frontmatter.title,
-        nextslug: nextEdge.node.fields.slug,
-        prevtitle: prevEdge.node.frontmatter.title,
-        prevslug: prevEdge.node.fields.slug
-      }
-    });
+    if (edge.node.frontmatter.posttype === 'project') {
+      createPage({
+        path: `/project${edge.node.fields.slug}`,
+        component: projectPage,
+        context: {
+          slug:  edge.node.fields.slug,
+          category: edge.node.frontmatter.category,
+        }
+      });
+    } else { // blog post
+      createPage({
+        path: edge.node.fields.slug,
+        component: postPage,
+        context: {
+          slug: edge.node.fields.slug, 
+          category: edge.node.frontmatter.category,
+        }
+      });
+    }
   });
 
   tagSet.forEach(tag => {

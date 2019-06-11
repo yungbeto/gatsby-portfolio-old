@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "gatsby";
-import './PostListing.scss';
+import './WorkListing.scss';
 
 
-class PostListing extends React.Component {
+class WorkListing extends React.Component {
   getPostList() {
     const postList = [];
     this.props.postEdges.forEach(postEdge => {
@@ -24,7 +24,7 @@ class PostListing extends React.Component {
     const postList = this.getPostList();
     return (
       <section id="blog" class="column">
-    <span class="subheader">blog</span>
+    <span class="subheader">WORK</span>
         {/* Your post list here. */
         postList.map(post => (
           <article className="blogCard">
@@ -40,7 +40,7 @@ class PostListing extends React.Component {
                 </div>
                 <div className="blogCard__main">
                   <span className="blogCard__main--copy">{post.excerpt}</span>
-                  <Link to={post.path} key={post.title} className="blogCard_readMore">Read More...</Link>
+                  <Link to={`/project/${post.path}`} key={post.title} className="blogCard_readMore">Read More...</Link>
                 </div>
               </div>
             </article>
@@ -51,4 +51,4 @@ class PostListing extends React.Component {
   }
 }
 
-export default PostListing;
+export default WorkListing;

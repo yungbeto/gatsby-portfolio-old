@@ -1,0 +1,37 @@
+.globalHead {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 300;
+    letter-spacing: .1em;
+    margin-bottom: 48px;
+    padding-top: 48px;
+}
+.globalHead__left {
+    margin-left:16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+}
+.globalHead__left--item {
+    display: flex;
+    min-width: 240px;
+    text-align: left;
+    font-weight:400;
+}
+.globalHead__right{
+    display: flex;
+    margin-right:16px;
+}
+.globalHead__right--item {
+    display: flex;
+    min-width:320px;
+    text-align: right;
+    margin-right:16px;
+}
+.bold {
+    font-weight: 600;
+}
